@@ -37,8 +37,7 @@ from itertools import permutations
 
 parser = argparse.ArgumentParser(epilog=__doc__,
                                  formatter_class=argparse.RawTextHelpFormatter)
-parser.add_argument('input',
-                    type=argparse.FileType('rt'))
+parser.add_argument('input', type=argparse.FileType('rt'))
 parser.add_argument('-n',
                     type=int,
                     default=3,
@@ -53,7 +52,7 @@ input_sorted = sorted([int(line) for line in args.input.readlines()])
 # note: only gets one matching pair, stops calculation afterwards
 magic_entries = next(
     filter(lambda v: sum(v) == 2020,
-    permutations(input_sorted, args.n))
+           permutations(input_sorted, args.n))
 )
 
 print(magic_entries)
