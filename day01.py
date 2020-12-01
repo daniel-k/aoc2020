@@ -31,15 +31,19 @@ one if you can find three numbers in your expense report that meet the same
 criteria.
 """
 
-
 import argparse
 from functools import reduce
 from itertools import permutations
 
-parser = argparse.ArgumentParser()
-parser.add_argument('--number-count', '-n', type=int, default=3)
-parser.add_argument('--target-sum', '-s', type=int, default=2020)
-parser.add_argument('input', type=argparse.FileType('rt'))
+parser = argparse.ArgumentParser(epilog=__doc__,
+                                 formatter_class=argparse.RawTextHelpFormatter)
+parser.add_argument('input',
+                    type=argparse.FileType('rt'))
+parser.add_argument('-n',
+                    type=int,
+                    default=3,
+                    help='How many numbers to search that sum up to 2020')
+
 args = parser.parse_args()
 
 # sorting may decrease runtime, but that is pure luck with the naive approach
@@ -48,8 +52,8 @@ input_sorted = sorted([int(line) for line in args.input.readlines()])
 # build permutations and check if their sum adds up.
 # note: only gets one matching pair, stops calculation afterwards
 magic_entries = next(
-    filter(lambda v: sum(v) == args.target_sum,
-    permutations(input_sorted, args.number_count))
+    filter(lambda v: sum(v) == 2020,
+    permutations(input_sorted, args.n))
 )
 
 print(magic_entries)
