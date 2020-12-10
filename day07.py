@@ -88,6 +88,7 @@ from collections import defaultdict
 from typing import Dict, Iterable, List, Set, Callable, Optional
 from functools import reduce
 from itertools import product
+from utils import pairwise
 
 WeightedDAG = Dict[str, Dict[str, int]]
 
@@ -167,16 +168,6 @@ else:
             out.extend([(is_end or keep, [start] + l) for keep, l in list(go_up(dag, next_vertex, end))])
 
         return out
-
-
-
-    from itertools import tee
-    def pairwise(iterable):
-        "s -> (s0,s1), (s1,s2), (s2, s3), ..."
-        a, b = tee(iterable)
-        next(b, None)
-        return zip(a, b)
-
 
     intermediate_bags_already_counted = set()
 
